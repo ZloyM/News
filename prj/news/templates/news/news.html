@@ -1,0 +1,13 @@
+<!-- Наследуемся от шаблона default.html, который мы создавали еще во времена flatpages -->
+{% extends 'default.html' %}
+
+{% load censor %} <!-- не забываем заранее загружать наши фильтры! -->
+
+<!-- Выводим заголовк, дату публикации и текст статьи  -->
+{% block content %}
+{% for new in news %}
+<h5><p>{{ new.title|censor }} : {{ new.date_pub }}</p></h5>
+<a href="{{ new.get_absolute_url }}">{{ new.text|censor|truncatechars:50 }}</a>
+<hr>
+{% endfor %}
+{% endblock content %}
